@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+
+# Data files (except sample data if needed)
+data/*.csv
+!data/.gitkeep
+
+# Results
+results/*
+!results/.gitkeep
+
+# CatBoost
+catboost_info/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Model checkpoints
+*.pth
+*.pt
+checkpoints/
