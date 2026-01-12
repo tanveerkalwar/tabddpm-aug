@@ -14,7 +14,7 @@ This is the official code for our paper **"TabDDPM-Aug: Adaptive Diffusion-Based
 
 ## Environment
 
-Tested with Python 3.8–3.11 and PyTorch 2.x. Create a virtualenv or conda environment before installation.
+Tested on Google Colab (Python 3.12.12, PyTorch 2.9.0). Create a virtualenv or conda environment before installation.
 
 ## File Structure
 

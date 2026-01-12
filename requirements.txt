@@ -1,22 +1,22 @@
 # Core dependencies
-numpy>=1.24.0,<2.0.0
-pandas>=2.0.0,<3.0.0
-scipy>=1.10.0,<2.0.0
+numpy==2.0.2
+pandas==2.2.2
+scipy==1.16.3
 
 # Machine learning
-scikit-learn>=1.2.0,<2.0.0
-imbalanced-learn>=0.10.0,<1.0.0
+scikit-learn==1.6.1
+imbalanced-learn==0.14.0
 
 # Deep learning
-torch>=1.13.0,<3.0.0
+torch==2.9.0
 
 # Tabular synthesis baselines
-ctgan>=0.7.0,<1.0.0
-sdv>=1.2.0,<2.0.0
+ctgan==0.11.1
+sdv==1.32.1
 
 # Gradient boosting
-catboost>=1.2,<2.0
-xgboost>=1.7.0,<3.0.0
+catboost==1.2.8
+xgboost==3.1.2
 
 # TabDDPM (install separately from GitHub)
-# git+https://github.com/rotot0/tab-ddpm.git
+# git+https://github.com/yandex-research/tab-ddpm.git
