@@ -13,21 +13,20 @@ Place your CSV files here, each with a binary label column specified by target_c
 
 ### 1. Adult Income
 - **Source**: https://archive.ics.uci.edu/dataset/2/adult
-- **Filename**: `adult.csv`
 - **Target**: `income` (>50K=1, ≤50K=0)
 - **Description**: Census data with 48,842 samples, 14 features
 
 ### 2. Pima Diabetes  
 - **Source**: https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database
-- **Filename**: `pima.csv`
 - **Target**: `Outcome` (diabetic=1, healthy=0)
 - **Description**: Medical data with 768 samples, 8 features
 
 ### 3. Credit Card Fraud
 - **Source**: https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud
-- **Filename**: `creditcard.csv`
+- Due to size constraints, `creditcard.csv` is not included in this repository.
+- Please download the original dataset from Kaggle, save it as `data/creditcard.csv`, and ensure the filename matches `DATASET_FILES['credit']['filename']` in `config.py`.
 - **Target**: `default` (fraud=1, legitimate=0)
-- **Description**: Transaction data with 284,807 samples, 30 features
+- **Description**: Transaction data with 284,807 samples, 29 features
 
 ## Using Custom Datasets
 
