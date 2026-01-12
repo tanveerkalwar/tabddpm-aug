@@ -1,4 +1,4 @@
-# TabDDPM-Aug: Adaptive Hybrid Augmentation for Imbalanced Tabular Data
+# TabDDPM-Aug: Adaptive Diffusion-Based Hybrid Augmentation for Imbalanced Tabular Classification
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
@@ -7,10 +7,10 @@ This is the official code for our paper **"TabDDPM-Aug: Adaptive Diffusion-Based
 
 ## Key Features
 
-- **Adaptive Strategy Selection**: Automatically switches between DBHA (low-density) and FDHA (high-density) regimes
-- **DCR Filtering**: IQR-based quality filtering using Distance-to-Closest-Real metric
-- **Ensemble Generation**: Multi-model synthesis for improved diversity
-- **Comprehensive Evaluation**: 7 baselines + 9 evaluation metrics (utility, fidelity, privacy)
+- **Adaptive Strategy Selection**: Automatically switches between DBHA (low-density) and FDHA (high-density) regimes.
+- **DCR Filtering**: IQR-based quality filtering using Distance-to-Closest-Real metric.
+- **Ensemble Generation**: Multi-model synthesis for improved diversity.
+- **Comprehensive Evaluation**: 7 baselines + 9 evaluation metrics (utility, fidelity, privacy).
 
 ## Environment
 
@@ -36,7 +36,7 @@ TabDDPM-Aug is compared against 7 baseline augmentation methods:
 
 **Requires separate installation**:
 - [CTAB-GAN-Plus](https://github.com/Team-TUD/CTAB-GAN-Plus) - Clone to repo root
-- [TabDDPM](https://github.com/rotot0/tab-ddpm) - Clone to repo root
+- [TabDDPM](https://github.com/yandex-research/tab-ddpm) - Clone to repo root
 
 See [Installation](#installation) for setup instructions.
 
@@ -55,7 +55,7 @@ pip install -e .
 
 ### 3. Install TabDDPM (Required)
 ```bash
-git clone https://github.com/rotot0/tab-ddpm.git
+git clone https://github.com/yandex-research/tab-ddpm.git
 cd tab-ddpm
 pip install -e .
 cd ..
@@ -71,7 +71,7 @@ git clone https://github.com/Team-TUD/CTAB-GAN-Plus.git
 python -c "from TabDDPM_Aug import load_dataset; print('Installation successful')"
 ```
 
-## Quick Start
+## Quick Start Example
 ```bash
 # Run the main 9-method comparison
 python scripts/run_full_experiment.py --dataset pima
@@ -125,7 +125,7 @@ For more datasets and a complete discussion of the metrics, please see the paper
 
 **"ModuleNotFoundError: tab_ddpm"**
 ```bash
-git clone https://github.com/rotot0/tab-ddpm.git
+git clone https://github.com/yandex-research/tab-ddpm.git
 cd tab-ddpm
 pip install -e .
 ```
@@ -137,7 +137,6 @@ pip install -e .
 **"CTAB-GAN-Plus not found"**
 ```bash
 git clone https://github.com/Team-TUD/CTAB-GAN-Plus.git
-# Add to TabDDPM_Aug/ folder
 ```
 
 **Import errors**
