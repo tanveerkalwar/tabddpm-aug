@@ -248,7 +248,7 @@ def run_full_experiment(df, device, main_config, dataset_name):
     print("\n" + "="*100)
     print("FINAL RESULTS - Statistical Fidelity & Privacy")
     print("="*100)
-    print(f"\n{'Method':<20} {'KS ↓':<10} {'MMD ↓':<10} {'JS ↓':<10} {'WD ↓':<10} {'Corr ↓':<10} {'DCR ↑':<10} {'MIA ↓':<10}")
+    print(f"\n{'Method':<20} {'KS ↓':<10} {'MMD ↓':<10} {'JS ↓':<10} {'WD ↓':<10} {'Corr ↓':<10} {'DCR':<10} {'MIA ↓':<10}")
     print("-"*120)
     
     for method in ['copula', 'ctgan', 'tvae', 'ctabganp', 'tabddpm', 'tabddpm_aug']:
