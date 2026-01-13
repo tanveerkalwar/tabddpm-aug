@@ -8,9 +8,10 @@ This is the official code for our paper **"TabDDPM-Aug: Adaptive Diffusion-Based
 ## Key Features
 
 - **Adaptive Strategy Selection**: Automatically switches between DBHA (low-density) and FDHA (high-density) regimes.
-- **DCR Filtering**: IQR-based quality filtering using Distance-to-Closest-Real metric.
-- **Ensemble Generation**: Multi-model synthesis for improved diversity.
-- **Comprehensive Evaluation**: 7 baselines + 9 evaluation metrics (utility, fidelity, privacy).
+- **Hybrid Dual-Stream Architecture**: Combines SMOTE-based linear interpolation with an ensemble of K diffusion models for robust minority synthesis.
+- **Adaptive Quality Filtering**: Employs IQR-based Distance-to-Closest-Real (DCR) metrics to mitigate distributional collapse and prevent memorization.
+- **Privacy-Preserving Synthesis**: Significantly reduces Membership Inference Attack (MIA) risk while maintaining competitive classification utility.
+- **Comprehensive Benchmarking**: Validated against 7 baselines across 3 diverse domains using 9 metrics for utility, fidelity, and privacy.
 
 ## Environment
 
