@@ -11,11 +11,10 @@ This is the official code for our paper **"TabDDPM-Aug: Adaptive Diffusion-Based
 - **Hybrid Dual-Stream Architecture**: Combines SMOTE-based linear interpolation with an ensemble of K TabDDPM models for robust minority synthesis.
 - **Adaptive Quality Filtering**: Employs IQR-based Distance-to-Closest-Real (DCR) metrics to mitigate distributional collapse and prevent memorization.
 - **Privacy-Preserving Synthesis**: Significantly reduces Membership Inference Attack (MIA) risk while maintaining competitive classification utility.
-- **Comprehensive Benchmarking**: Validated against 7 baselines across 3 diverse domains using 9 metrics for utility, fidelity, and privacy.
 
 ## Environment
 
-Tested on Google Colab (Python 3.12.12, PyTorch 2.9.0). Create a virtualenv or conda environment before installation.
+Tested on (Python 3.12.12, PyTorch 2.9.0). Create a virtualenv or conda environment before installation.
 
 ## File Structure
 
@@ -26,18 +25,6 @@ Tested on Google Colab (Python 3.12.12, PyTorch 2.9.0). Create a virtualenv or c
 - `setup.py` – package installation script
 - `README.md`, `LICENSE.txt` – documentation and license
 
-Baseline Methods
-
-TabDDPM-Aug is compared against 7 baseline augmentation methods:
-
-**Included via Python dependencies**:
-- SMOTE (`imbalanced-learn`)
-
-**Requires separate installation**:
-- [CTAB-GAN-Plus](https://github.com/Team-TUD/CTAB-GAN-Plus) - Clone to repo root
-- [TabDDPM](https://github.com/yandex-research/tab-ddpm) - Clone to repo root
-
-See [Installation](#installation) for setup instructions.
 
 ## Installation
 
@@ -52,20 +39,7 @@ cd tabddpm-aug
 pip install -e .
 ```
 
-### 3. Install TabDDPM (Required)
-```bash
-git clone https://github.com/yandex-research/tab-ddpm.git
-cd tab-ddpm
-pip install -e .
-cd ..
-```
-
-### 4. Install CTAB-GAN+ (Optional, for full comparisons)
-```bash
-git clone https://github.com/Team-TUD/CTAB-GAN-Plus.git
-```
-
-### 5. Verify Installation
+### 3. Verify Installation
 ```bash
 python -c "from TabDDPM_Aug import load_dataset; print('Installation successful')"
 ```
@@ -91,21 +65,11 @@ For dataset details, file locations, and how to add new datasets, see `data/READ
 
 ## Troubleshooting
 
-**"ModuleNotFoundError: tab_ddpm"**
-```bash
-git clone https://github.com/yandex-research/tab-ddpm.git
-cd tab-ddpm
-pip install -e .
-```
 
 **"CUDA out of memory"**
 - Reduce `batch_size` in `config.py`
 - Switch to CPU: `device='cpu'`
 
-**"CTAB-GAN-Plus not found"**
-```bash
-git clone https://github.com/Team-TUD/CTAB-GAN-Plus.git
-```
 
 **Import errors**
 ```bash
