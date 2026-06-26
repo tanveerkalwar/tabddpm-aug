@@ -389,7 +389,7 @@ def tabddpm_aug_final(X_train, y_train, config, seed=42, device="cpu"):
     rho = n_minority / max(d, 1)
     print(f"Features d = {d}, density ratio ρ = {rho:.2f}")
 
-    tau_size = 50.0  # density threshold used to separate low vs high-density regimes.
+    tau_size = 100.0  # density threshold used to separate low vs high-density regimes.
 
     if rho < tau_size:  # Low-density → DBHA
         print("Strategy: Low-density regime (DBHA). Using Easy–Hard split.")
