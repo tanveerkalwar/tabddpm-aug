@@ -2,7 +2,7 @@
 Classification utility metrics for augmented datasets.
 """
 import numpy as np
-from sklearn.metrics import f1_score
+from sklearn.metrics import f1_score, roc_auc_score, precision_recall_curve, auc
 from sklearn.ensemble import RandomForestClassifier
 from catboost import CatBoostClassifier
 from xgboost import XGBClassifier
