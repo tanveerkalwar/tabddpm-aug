@@ -46,11 +46,7 @@ def evaluate_comprehensive(X_train, y_train, X_test, y_test, X_synthetic, method
     y_aug = np.hstack([y_train, np.full(len(X_synthetic), np.argmin(np.bincount(y_train)))])
     
     unique, counts = np.unique(y_aug, return_counts=True)
-    scale_pos = 1.0
-    if len(counts) == 2:
-        majority_count = max(counts)
-        minority_count = min(counts)
-        scale_pos = majority_count / minority_count
+    scale_pos = counts[0] / counts[1] if len(counts) == 2 and counts[1] > 0 else 1.0
     
     catboost_train_dir = '/content/catboost_info/' if os.path.exists('/content/drive') else None
     
@@ -78,12 +74,14 @@ def evaluate_comprehensive(X_train, y_train, X_test, y_test, X_synthetic, method
             auprc_scores.append(auc(recall, precision))
         except Exception as e:
             print(f"    Classifier {type(clf).__name__} failed: {e}")
-            import traceback
-            traceback.print_exc()
-            raise e
+            f1_scores.append(0.0)
+            auc_scores.append(0.5)
+            auprc_scores.append(0.0)
 
     
     results['f1'] = float(np.mean(f1_scores))
+    results['auc'] = float(np.mean(auc_scores))
+    results['auprc'] = float(np.mean(auprc_scores))
     
     ks_stat, ks_pval = compute_ks_statistics(X_minority, X_synthetic)
     results['ks_statistic'] = float(ks_stat)
@@ -129,11 +127,7 @@ def evaluate_simple(X_train, y_train, X_test, y_test, method_name, seed=42):
         dict: Dictionary with mean F1, AUC, and AUPRC.
     """
     unique, counts = np.unique(y_train, return_counts=True)
-    scale_pos = 1.0
-    if len(counts) == 2:
-        majority_count = max(counts)
-        minority_count = min(counts)
-        scale_pos = majority_count / minority_count
+    scale_pos = counts[0] / counts[1] if len(counts) == 2 and counts[1] > 0 else 1.0
     
     catboost_train_dir = '/content/catboost_info/' if os.path.exists('/content/drive') else None
     
@@ -146,7 +140,7 @@ def evaluate_simple(X_train, y_train, X_test, y_test, method_name, seed=42):
         LogisticRegression(max_iter=500, class_weight='balanced', random_state=seed, n_jobs=-1)
     ]
     
-    f1_scores= []
+    f1_scores, auc_scores, auprc_scores = [], [], []
     for clf in CLASSIFIERS:
         try:
             clf.fit(X_train, y_train)
@@ -156,12 +150,19 @@ def evaluate_simple(X_train, y_train, X_test, y_test, method_name, seed=42):
             else:
                 y_proba = clf.decision_function(X_test)
             f1_scores.append(f1_score(y_test, y_pred))
+            auc_scores.append(roc_auc_score(y_test, y_proba))
+            precision, recall, _ = precision_recall_curve(y_test, y_proba)
+            auprc_scores.append(auc(recall, precision))
         except Exception as e:
             print(f"    Classifier {type(clf).__name__} failed: {e}")
             f1_scores.append(0.0)
+            auc_scores.append(0.5)
+            auprc_scores.append(0.0)
     
     return {
         'f1': float(np.mean(f1_scores)),
+        'auc': float(np.mean(auc_scores)),
+        'auprc': float(np.mean(auprc_scores))
     }
 
 
