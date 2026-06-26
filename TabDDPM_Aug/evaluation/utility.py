@@ -2,7 +2,7 @@
 Classification utility metrics for augmented datasets.
 """
 import numpy as np
-from sklearn.metrics import f1_score, roc_auc_score, precision_recall_curve, auc
+from sklearn.metrics import f1_score
 from sklearn.ensemble import RandomForestClassifier
 from catboost import CatBoostClassifier
 from xgboost import XGBClassifier
@@ -80,8 +80,6 @@ def evaluate_comprehensive(X_train, y_train, X_test, y_test, X_synthetic, method
 
     
     results['f1'] = float(np.mean(f1_scores))
-    results['auc'] = float(np.mean(auc_scores))
-    results['auprc'] = float(np.mean(auprc_scores))
     
     ks_stat, ks_pval = compute_ks_statistics(X_minority, X_synthetic)
     results['ks_statistic'] = float(ks_stat)
@@ -140,7 +138,7 @@ def evaluate_simple(X_train, y_train, X_test, y_test, method_name, seed=42):
         LogisticRegression(max_iter=500, class_weight='balanced', random_state=seed, n_jobs=-1)
     ]
     
-    f1_scores, auc_scores, auprc_scores = [], [], []
+    f1_scores= []
     for clf in CLASSIFIERS:
         try:
             clf.fit(X_train, y_train)
@@ -150,19 +148,12 @@ def evaluate_simple(X_train, y_train, X_test, y_test, method_name, seed=42):
             else:
                 y_proba = clf.decision_function(X_test)
             f1_scores.append(f1_score(y_test, y_pred))
-            auc_scores.append(roc_auc_score(y_test, y_proba))
-            precision, recall, _ = precision_recall_curve(y_test, y_proba)
-            auprc_scores.append(auc(recall, precision))
         except Exception as e:
             print(f"    Classifier {type(clf).__name__} failed: {e}")
             f1_scores.append(0.0)
-            auc_scores.append(0.5)
-            auprc_scores.append(0.0)
     
     return {
         'f1': float(np.mean(f1_scores)),
-        'auc': float(np.mean(auc_scores)),
-        'auprc': float(np.mean(auprc_scores))
     }
 
 
