@@ -122,7 +122,7 @@ def evaluate_simple(X_train, y_train, X_test, y_test, method_name, seed=42):
     Returns:
         dict: Dictionary with mean F1, AUC, and AUPRC.
     """
-    unique, counts = np.unique(y_aug, return_counts=True)
+    unique, counts = np.unique(y_train, return_counts=True)
     scale_pos = 1.0
     if len(counts) == 2:
         majority_count = max(counts)
