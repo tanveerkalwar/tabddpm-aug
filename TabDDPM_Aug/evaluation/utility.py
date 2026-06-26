@@ -74,9 +74,9 @@ def evaluate_comprehensive(X_train, y_train, X_test, y_test, X_synthetic, method
             auprc_scores.append(auc(recall, precision))
         except Exception as e:
             print(f"    Classifier {type(clf).__name__} failed: {e}")
-            f1_scores.append(0.0)
-            auc_scores.append(0.5)
-            auprc_scores.append(0.0)
+            import traceback
+            traceback.print_exc()
+            raise e
 
     
     results['f1'] = float(np.mean(f1_scores))
