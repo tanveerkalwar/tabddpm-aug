@@ -74,7 +74,7 @@ def evaluate_comprehensive(X_train, y_train, X_test, y_test, X_synthetic, method
 
     
     results['f1'] = float(np.mean(f1_scores))
-    
+    print(f"    F1: {results['f1']:.4f}")
     ks_stat, ks_pval = compute_ks_statistics(X_minority, X_synthetic)
     results['ks_statistic'] = float(ks_stat)
     results['ks_pvalue'] = float(ks_pval)
