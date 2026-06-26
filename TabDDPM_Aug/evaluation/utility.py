@@ -33,8 +33,7 @@ def evaluate_comprehensive(X_train, y_train, X_test, y_test, X_synthetic, method
     results = {}
     if X_synthetic is None or len(X_synthetic) == 0:
         print("    No synthetic data to evaluate.")
-        return { 'f1': 0.0, 'auc': 0.5, 'auprc': 0.0, 'ks_statistic': 1.0, 'mmd': 1.0, 
-                 'js_divergence': 1.0, 'wasserstein': 1.0, 'correlation_l2': 10.0, 
+        return { 'f1': 0.0, 'ks_statistic': 1.0, 'mmd': 1.0,
                  'mean_dcr': 10.0, 'mia_auc': 0.5, 'sdqs': 0.0 }
                  
     X_minority = X_train[y_train == np.argmin(np.bincount(y_train))]
@@ -59,7 +58,7 @@ def evaluate_comprehensive(X_train, y_train, X_test, y_test, X_synthetic, method
         LogisticRegression(max_iter=500, class_weight='balanced', random_state=seed, n_jobs=-1)
     ]
     
-    f1_scores, auc_scores, auprc_scores = [], [], []
+    f1_scores = []
     for clf in CLASSIFIERS:
         try:
             clf.fit(X_aug, y_aug)
@@ -69,14 +68,9 @@ def evaluate_comprehensive(X_train, y_train, X_test, y_test, X_synthetic, method
             else:
                 y_proba = clf.decision_function(X_test)
             f1_scores.append(f1_score(y_test, y_pred))
-            auc_scores.append(roc_auc_score(y_test, y_proba))
-            precision, recall, _ = precision_recall_curve(y_test, y_proba)
-            auprc_scores.append(auc(recall, precision))
         except Exception as e:
             print(f"    Classifier {type(clf).__name__} failed: {e}")
             f1_scores.append(0.0)
-            auc_scores.append(0.5)
-            auprc_scores.append(0.0)
 
     
     results['f1'] = float(np.mean(f1_scores))
